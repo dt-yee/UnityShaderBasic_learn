@@ -6,7 +6,7 @@ Shader "Custom/c6_diffusePixelLevel" {
 	}
     SubShader {
         Pass{
-            Tags { "RenderType"="ForwardBase" }
+            Tags { "LightMode"="ForwardBase" }
             
             CGPROGRAM
 
