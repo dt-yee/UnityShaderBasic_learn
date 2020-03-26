@@ -31,32 +31,33 @@
 
             struct v2f
             {
-                float4 pos : SV_POSITION；
-                float2 uv : TEXCOORD0;
+                float4 pos : SV_POSITION;
+                float4 uv : TEXCOORD0;
                 float3 LightDir : TEXCOORD1;
                 float3 ViewDir : TEXCOORD2;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            fixed3 Color;
+            fixed3 _Color;
             sampler2D _BumpMap;
-            float4 _BumpScale;
+            float4 _BumpMap_ST;
+            float _BumpScale;
             float _Gloss;
             fixed4 _Specular;
 
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv.xy = v.texcoord.xy * _MainTex_ST.xy + _MainTex_ST.zw;
                 o.uv.zw = v.texcoord.xy * _BumpMap_ST.xy + _BumpMap_ST.zw;
 
-                float3 binormal = cross( normalize(v.normal), normalize(v.tangent.xyz) ) * v.tangent.w;
+                // float3 binormal = cross( normalize(v.normal), normalize(v.tangent.xyz) ) * v.tangent.w;
 
                 TANGENT_SPACE_ROTATION;
                 o.LightDir = mul(rotation, ObjSpaceLightDir(v.vertex)).xyz;
-                o.ViewDir = mul(rotation, OBjSpaceViewDir(v.vertex)).xyz;
+                o.ViewDir = mul(rotation, ObjSpaceViewDir(v.vertex)).xyz;
 
                 return o;
             }
@@ -81,9 +82,9 @@
 
                 fixed3 halfDir = normalize(tangentNormal + tangentViewDir);
 
-                fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(tangent(tangentNormal, halfDir)), _Gloss));
+                fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0, dot(tangentNormal, halfDir)), _Gloss);
 
-                return (ambient + diffuse + specular, 1.0);
+                return fixed4(ambient + diffuse + specular, 1.0);
             }
             ENDCG
         }

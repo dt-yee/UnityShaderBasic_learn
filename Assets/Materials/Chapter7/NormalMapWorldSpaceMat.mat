@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: NormalMapTangentSpaceMat
-  m_Shader: {fileID: 4800000, guid: 80da0c4d8afbdca4f837b4999a126bdf, type: 3}
+  m_Name: NormalMapWorldSpaceMat
+  m_Shader: {fileID: 4800000, guid: 365a3ca9d28570b4b83e50762e7a7cdb, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -74,6 +74,6 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 0.7028302, b: 0.7028302, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _Specular: {r: 0.6226415, g: 0.61970454, b: 0.61970454, a: 1}
+    - _Specular: {r: 1, g: 1, b: 1, a: 1}
